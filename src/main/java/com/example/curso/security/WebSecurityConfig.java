@@ -11,7 +11,7 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
-import com.example.curso.service.UserServiceImpl;
+import com.example.curso.service.IUserService;
 
 @Configuration
 @EnableWebSecurity
@@ -19,7 +19,7 @@ import com.example.curso.service.UserServiceImpl;
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
 	@Autowired
-	private UserServiceImpl userService;
+	private IUserService userService;
 	
 	@Override
 	@Bean
@@ -33,6 +33,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 	}
 	
 	@Override
+	@Autowired
 	protected void configure(AuthenticationManagerBuilder auth) throws Exception{
 		auth.userDetailsService(userService).passwordEncoder(encoder());
 	}
